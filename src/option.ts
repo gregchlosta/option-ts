@@ -1,15 +1,20 @@
-export type Some<T> = { __tag: 'some'; value: T }
-export type None = { __tag: 'none' }
+export enum Kinds {
+  Some = 'Some',
+  None = 'None',
+}
+
+export type Some<T> = { kind: Kinds.Some; value: T }
+export type None = { kind: Kinds.None }
 
 export type Option<T> = Some<T> | None
 
-export const newNone: None = { __tag: 'none' }
-export const newSome = <T>(value: T): Some<T> => {
-  return { __tag: 'some', value }
+export const none: None = { kind: Kinds.None }
+export const some = <T>(value: T): Some<T> => {
+  return { kind: Kinds.Some, value }
 }
 
-export const isNone = <T>(o: Option<T>): o is None => o.__tag === 'none'
-export const isSome = <T>(o: Option<T>): o is Some<T> => o.__tag === 'some'
+export const isNone = <T>(o: Option<T>): o is None => o.kind === Kinds.None
+export const isSome = <T>(o: Option<T>): o is Some<T> => o.kind === Kinds.Some
 
 export const fold = <T>(o: Option<T>, defaultT: () => T): T => {
   if (isSome(o)) return o.value
@@ -20,9 +25,9 @@ export const map =
   <T, T2>(f: (t: T) => T2) =>
   (o: Option<T>): Option<T2> => {
     if (isSome(o)) {
-      return newSome(f(o.value))
+      return some(f(o.value))
     }
-    return newNone
+    return none
   }
 
 export const lift =
@@ -35,7 +40,7 @@ export const filter = <T>(
   predicate: (t: T) => boolean
 ): Option<T> => {
   if (isSome(o) && predicate(o.value)) return o
-  return newNone
+  return none
 }
 
 export const match =
@@ -44,3 +49,7 @@ export const match =
     if (isSome(o)) return someF(o.value)
     else return noneF()
   }
+
+export const withDefault = <T>(defaultVal: T, option: Option<T>): T => {
+  return isSome(option) ? option.value : defaultVal
+}
