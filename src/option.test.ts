@@ -1,21 +1,61 @@
-import { assert, describe, expect, it } from 'vitest'
-import { Some, isSome, some } from './option.js'
+import { describe, expect, it } from 'vitest'
+import {
+  Kinds,
+  Match,
+  Some,
+  isSome,
+  None,
+  isNone,
+  newSome,
+  newNone,
+  match,
+  withDefault,
+} from './option.js'
 
-describe('option', () => {
-  it('test', () => {
-    const v = some('test')
-    expect(isSome(v)).eq(true)
+const VALUE = 'test'
+const DEFAULT = 'default'
+const some: Some<string> = { kind: Kinds.Some, value: VALUE }
+const none: None = { kind: Kinds.None }
+const matcher: Match<string, string> = {
+  Some: (v) => v,
+  None: () => DEFAULT,
+}
+
+describe('Option', () => {
+  it('Create Some', () => {
+    const some = newSome(VALUE)
+    expect(some.kind).eq(Kinds.Some)
+    expect(some.value).eq(VALUE)
   })
 
-  it('foo', () => {
-    assert.equal(Math.sqrt(4), 2)
+  it('Create None', () => {
+    const none = newNone
+    expect(none.kind).eq(Kinds.None)
   })
 
-  it('bar', () => {
-    expect(1 + 1).eq(2)
+  it('Typeguards Some', () => {
+    expect(isSome(some)).eq(true)
+    expect(isNone(some)).eq(false)
   })
 
-  it('snapshot', () => {
-    expect({ foo: 'bar' }).toMatchSnapshot()
+  it('Typeguards None', () => {
+    expect(isNone(none)).eq(true)
+    expect(isSome(none)).eq(false)
+  })
+
+  it('match for Some value', () => {
+    expect(match(some, matcher)).eq(VALUE)
+  })
+
+  it('match for None value', () => {
+    expect(match(none, matcher)).eq(DEFAULT)
+  })
+
+  it('withDefault for Some value', () => {
+    expect(withDefault(some, DEFAULT)).eq(VALUE)
+  })
+
+  it('withDefault for None value', () => {
+    expect(withDefault(none, DEFAULT)).eq(DEFAULT)
   })
 })

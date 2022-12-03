@@ -1,6 +1,6 @@
 {
   "name": "@gregchlosta/option-ts",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "",
   "type": "module",
   "main": "lib/index.js",
