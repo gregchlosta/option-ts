@@ -1,7 +1,7 @@
 {
   "name": "@gregchlosta/option-ts",
-  "version": "0.0.6",
-  "description": "",
+  "version": "0.0.7",
+  "description": "Simple implementation of typescript option type with pattern matching",
   "type": "module",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -11,9 +11,20 @@
     "test": "vitest",
     "coverage": "vitest run --coverage"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "option",
+    "option-ts",
+    "ts-option",
+    "type",
+    "match",
+    "pattern",
+    "matching",
+    "functional",
+    "programming",
+    "simple"
+  ],
+  "author": "Greg Chlosta",
+  "license": "MIT",
   "devDependencies": {
     "typescript": "^4.9.3",
     "vitest": "^0.25.3"
