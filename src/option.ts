@@ -8,9 +8,10 @@ export type None = { kind: Kinds.None }
 
 export type Option<T> = Some<T> | None
 
-export const newNone: None = { kind: Kinds.None }
-export const newSome = <T>(value: T): Some<T> => {
-  return { kind: Kinds.Some, value }
+export const newOption = <T>(value?: T): Option<T> => {
+  return value
+    ? ({ kind: Kinds.Some, value } as Some<T>)
+    : ({ kind: Kinds.None } as None)
 }
 
 export const isSome = <T>(o: Option<T>): o is Some<T> => o.kind === Kinds.Some

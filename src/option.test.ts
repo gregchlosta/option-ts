@@ -6,8 +6,7 @@ import {
   isSome,
   None,
   isNone,
-  newSome,
-  newNone,
+  newOption,
   match,
   withDefault,
 } from './option.js'
@@ -22,23 +21,20 @@ const matcher: Match<string, string> = {
 }
 
 describe('Option', () => {
-  it('Create Some', () => {
-    const some = newSome(VALUE)
-    expect(some.kind).eq(Kinds.Some)
-    expect(some.value).eq(VALUE)
+  it('Create Option', () => {
+    const optionS = newOption(VALUE)
+    expect(optionS.kind).eq(Kinds.Some)
+
+    const optionN = newOption()
+    expect(optionN.kind).eq(Kinds.None)
   })
 
-  it('Create None', () => {
-    const none = newNone
-    expect(none.kind).eq(Kinds.None)
-  })
-
-  it('Typeguards Some', () => {
+  it('Typeguard Some', () => {
     expect(isSome(some)).eq(true)
     expect(isNone(some)).eq(false)
   })
 
-  it('Typeguards None', () => {
+  it('Typeguard None', () => {
     expect(isNone(none)).eq(true)
     expect(isSome(none)).eq(false)
   })
