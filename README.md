@@ -36,7 +36,8 @@ const none: Option<string> = newOption() // -> Option<string> -> (None)
 ### Patern matching with `match()`
 
 Match function will take `Option<T>`, and matcher object as parameters. Functions declared in the matcher object always have to return the same value type.
-Example below come from React, but it can be used with other fromtend framework and vanila JavaScript in browser and node environment.
+
+Example below come from React, but option-ts can be used with any other front-end framework or regular TypeScript.
 
 ```tsx
 import React from 'react'
