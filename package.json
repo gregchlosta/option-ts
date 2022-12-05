@@ -1,6 +1,6 @@
 {
   "name": "@gregchlosta/option-ts",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Simple implementation of Option type with Pattern Matching for TypesScript",
   "type": "module",
   "main": "lib/index.js",
