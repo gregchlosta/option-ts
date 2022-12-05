@@ -1,6 +1,6 @@
 # @gregchlosta/option-ts
 
-> Simple implementation of TypeScript Option type with Pattern Matching
+> Simple implementation of Option type with Pattern Matching for TypesScript
 
 ## The `Option<T>` and Its Advantages Over Null Values
 
@@ -33,10 +33,10 @@ const some = newOption('Some Value') // -> Option<string> -> (Some<string>)
 const none: Option<string> = newOption() // -> Option<string> -> (None)
 ```
 
-### Patern matching with match function
+### Patern matching with `match()`
 
 Match function will take `Option<T>`, and matcher object as parameters. Functions declared in the matcher object always have to return the same value type.
-Example below come from React, but it is not limited only to React.
+Example below come from React, but it can be used with other fromtend framework and vanila JavaScript in browser and node environment.
 
 ```tsx
 import React from 'react'
@@ -54,7 +54,7 @@ export const Button: React.FC<ButtonProps> = ({ title }) => {
 }
 ```
 
-### Unpacking Option<T> with withDefault function
+### Unpacking `Option<T>` with `withDefault()`
 
 To get direct access to the value we can simple unpack option using `withDefault()` which takes two parameters: option, and default value.
 
@@ -66,6 +66,18 @@ const noneOption: Option<string> = newOption()
 
 const valueSome = withDefault(someOption, 'default') // 'Some!'
 const valueDefault = withDefault(noneOption, 'default') // 'default'
+```
+
+### Type Guards
+
+```ts
+import { newOption, isSome, isNone } from '@gregchlosta/option-ts'
+
+const someOption = newOption('Some!')
+const noneOption: Option<string> = newOption()
+
+isSome(someOption) // true
+isNone(noneOption) // false
 ```
 
 ## License
